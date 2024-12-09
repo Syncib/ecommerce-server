@@ -39,6 +39,7 @@ const viewOrders = async (req, res) => {
   }
 };
 
+
 const addItem = async (req, res) => {
   if (req.user.role !== "admin") {
     return res.status(403).json({ error: "Access denied. Admins only." });
@@ -73,4 +74,11 @@ const placeOrder = async (req, res) => {
   }
 };
 
-module.exports = { addItem, getItems, getSingleItem, placeOrder, viewOrders };
+module.exports = {
+  addItem,
+  getItems,
+  getSingleItem,
+  placeOrder,
+  viewOrders,
+  viewCoupons,
+};

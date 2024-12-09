@@ -34,4 +34,17 @@ const getCoupons = async (req, res) => {
   }
 };
 
-module.exports = { getCoupons, addCoupon };
+const viewCoupons = async (req, res) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ error: "Access denied. Admins only." });
+  }
+  try {
+    const coupons = await Coupon.find(); // Sort by expiry date
+    res.status(200).json({ coupons });
+  } catch (error) {
+    console.error("Error fetching coupons:", error);
+    res.status(500).json({ message: "Failed to fetch coupons." });
+  }
+};
+
+module.exports = { getCoupons, addCoupon, viewCoupons };
