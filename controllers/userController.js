@@ -37,12 +37,17 @@ const signup = async (req, res) => {
     // Generate a token
     const token = createToken(newUser._id);
 
-    // Send response
-    return res.status(201).json({ newUser, token });
-
+    return res.status(201).json({
+      _id: newUser._id,
+      username: newUser.username,
+      email: newUser.email,
+      token,
+    });
   } catch (error) {
     // Handle server errors
-    return res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };
 
@@ -69,11 +74,17 @@ const login = async (req, res) => {
     const token = createToken(existingUser._id);
 
     // Send response
-    return res.status(200).json({ existingUser, token });
-
+    return res.status(200).json({
+      _id: existingUser._id,
+      username: existingUser.username,
+      email: existingUser.email,
+      token,
+    });
   } catch (error) {
     // Handle server errors
-    return res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };
 
