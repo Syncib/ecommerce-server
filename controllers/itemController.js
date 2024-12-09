@@ -80,5 +80,4 @@ module.exports = {
   getSingleItem,
   placeOrder,
   viewOrders,
-  viewCoupons,
 };
