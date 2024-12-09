@@ -26,6 +26,19 @@ const getSingleItem = async (req, res) => {
   }
 };
 
+const viewOrders = async (req,res)=>{
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ error: "Access denied. Admins only." });
+  }
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 }); 
+    res.status(200).json({ orders });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ message: "Failed to fetch orders." });
+  }
+}
+
 const addItem = async (req, res) => {
   if (req.user.role !== "admin") {
     return res.status(403).json({ error: "Access denied. Admins only." });
@@ -60,4 +73,4 @@ const placeOrder = async (req, res) => {
   }
 };
 
-module.exports = { addItem, getItems, getSingleItem, placeOrder };
+module.exports = { addItem, getItems, getSingleItem, placeOrder,viewOrders };
