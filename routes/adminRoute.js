@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const multer = require("multer");
 const requireAuth = require("../middleware/requireAuth");
-const { addItem } = require("../controllers/itemController");
+const { addItem,viewOrders } = require("../controllers/itemController");
 const { addCoupon } = require("../controllers/couponController");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
@@ -21,4 +21,5 @@ const uploadMiddleware = multer({ storage });
 router.use(requireAuth);
 router.post("/add", uploadMiddleware.single("image"), addItem);
 router.post("/addcoupon", addCoupon);
+router.get("/vieworders", viewOrders);
 module.exports = router;
