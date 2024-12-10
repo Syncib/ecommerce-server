@@ -10,6 +10,6 @@ router.get("/all", getItems);
 router.get("/:id", getSingleItem);
 router.use(requireAuth);
 router.post("/placed", placeOrder);
-router.post("/coupons", getCoupons);
+router.get("/coupons", getCoupons);
 
 module.exports = router;
