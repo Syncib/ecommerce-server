@@ -6,9 +6,9 @@ const {
   getSingleItem,
   placeOrder
 } = require("../controllers/itemController");
+router.get("/coupons", getCoupons);
 router.get("/all", getItems);
 router.get("/:id", getSingleItem);
-router.get("/coupons", getCoupons);
 router.use(requireAuth);
 router.post("/placed", placeOrder);
 
