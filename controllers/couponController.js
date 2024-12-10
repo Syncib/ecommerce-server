@@ -38,7 +38,7 @@ const addCoupon = async (req, res) => {
 const getCoupons = async (req, res) => {
   try {
     const coupons = await Coupon.find();
-    res.status(200).json(coupons);
+    res.status(200).json({coupons});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching coupons." });

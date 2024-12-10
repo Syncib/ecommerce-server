@@ -9,7 +9,7 @@ const {
 router.get("/all", getItems);
 router.get("/:id", getSingleItem);
 router.use(requireAuth);
-router.post("/placed", placeOrder);
 router.get("/coupons", getCoupons);
+router.post("/placed", placeOrder);
 
 module.exports = router;
