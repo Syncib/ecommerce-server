@@ -8,7 +8,7 @@ const {
 } = require("../controllers/itemController");
 router.get("/coupons", getCoupons);
 router.get("/all", getItems);
-router.get("/:id", getSingleItem);
+router.get("/single/:id", getSingleItem);
 router.use(requireAuth);
 router.post("/placed", placeOrder);
 
