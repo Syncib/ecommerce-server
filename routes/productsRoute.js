@@ -4,12 +4,11 @@ const { getCoupons } = require("../controllers/couponController");
 const {
   getItems,
   getSingleItem,
-  placeOrder,deleteSingleItem
+  placeOrder
 } = require("../controllers/itemController");
 router.get("/coupons", getCoupons);
 router.get("/all", getItems);
 router.get("/single/:id", getSingleItem);
-router.delete("/delete/:id",deleteSingleItem)
 router.use(requireAuth);
 router.post("/placed", placeOrder);
 
