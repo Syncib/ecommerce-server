@@ -39,7 +39,6 @@ const viewOrders = async (req, res) => {
   }
 };
 
-
 const addItem = async (req, res) => {
   if (req.user.role !== "admin") {
     return res.status(403).json({ error: "Access denied. Admins only." });
@@ -74,10 +73,24 @@ const placeOrder = async (req, res) => {
   }
 };
 
+const deleteSingleItem = async (req, res) => {
+  try {
+    const item = await Item.findByIdAndDelete(req.params.id);
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    res.status(200).json({ message: "Item deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting item:", error);
+    res.status(500).json({ message: "Failed to delete item" });
+  }
+};
+
 module.exports = {
   addItem,
   getItems,
   getSingleItem,
   placeOrder,
   viewOrders,
+  deleteSingleItem
 };
