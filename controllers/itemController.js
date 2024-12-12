@@ -54,6 +54,35 @@ const addItem = async (req, res) => {
   }
 };
 
+const editItem = async (req, res) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ error: "Access denied. Admins only." });
+  }
+
+  try {
+    const { id } = req.params;
+
+    // Validate request body
+    const updates = { ...req.body };
+    if (req.file) {
+      updates.image = req.file.path; // Include image if file is uploaded
+    }
+
+    // Update item in the database
+    const updatedItem = await Item.findByIdAndUpdate(id, updates, { new: true });
+
+    if (!updatedItem) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+
+    res.status(200).json(updatedItem);
+  } catch (error) {
+    console.error("Error editing item:", error);
+    res.status(500).json({ message: "Failed to edit item" });
+  }
+};
+
+
 const placeOrder = async (req, res) => {
   const { items, total } = req.body;
 
@@ -92,5 +121,6 @@ module.exports = {
   getSingleItem,
   placeOrder,
   viewOrders,
-  deleteSingleItem
+  deleteSingleItem,
+  editItem
 };
