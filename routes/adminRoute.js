@@ -28,5 +28,5 @@ router.post("/addcoupon", addCoupon);
 router.get("/vieworders", viewOrders);
 router.get("/viewcoupons", viewCoupons);
 router.delete("/delete/:id", deleteSingleItem);
-router.patch("/edit/:id", editItem);
+router.patch("/edit/:id",uploadMiddleware.single("image"), editItem);
 module.exports = router;
