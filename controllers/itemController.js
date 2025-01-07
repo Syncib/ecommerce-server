@@ -69,7 +69,9 @@ const editItem = async (req, res) => {
     }
 
     // Update item in the database
-    const updatedItem = await Item.findByIdAndUpdate(id, updates, { new: true });
+    const updatedItem = await Item.findByIdAndUpdate(id, updates, {
+      new: true,
+    });
 
     if (!updatedItem) {
       return res.status(404).json({ error: "Item not found" });
@@ -82,16 +84,15 @@ const editItem = async (req, res) => {
   }
 };
 
-
 const placeOrder = async (req, res) => {
-  const { items, total } = req.body;
+  const { items, total, address } = req.body;
 
   if (!items || items.length === 0 || !total) {
     return res.status(400).json({ message: "Invalid order data" });
   }
 
   try {
-    const newOrder = new Order({ items, total });
+    const newOrder = new Order({ items, total, address });
     await newOrder.save();
     res
       .status(201)
@@ -122,5 +123,5 @@ module.exports = {
   placeOrder,
   viewOrders,
   deleteSingleItem,
-  editItem
+  editItem,
 };
